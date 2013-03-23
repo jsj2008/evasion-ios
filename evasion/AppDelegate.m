@@ -8,12 +8,28 @@
 
 #import "AppDelegate.h"
 
+#import "MainViewController.h"
+
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
+    
+    // Screen iPhone 5
+    if([[UIScreen mainScreen]bounds].size.height == 568){
+        self.mainScreeniPhone5 = YES;
+    }
+    else{
+        self.mainScreeniPhone5 = NO;
+    }
+    
+    MainViewController *mainView = [[MainViewController alloc] init];
+    self.mainNav = [[UINavigationController alloc] initWithRootViewController:mainView];
+    
+    self.window.rootViewController = self.mainNav;
+    
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;

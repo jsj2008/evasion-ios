@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B084FACB16FDE5F80027BD8B /* FZViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B084FACA16FDE5F80027BD8B /* FZViewController.m */; };
+		B084FAD116FDE62E0027BD8B /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B084FAD016FDE62E0027BD8B /* MainViewController.m */; };
 		B0F4C60716FD2283002433F8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0F4C60616FD2283002433F8 /* UIKit.framework */; };
 		B0F4C60916FD2283002433F8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0F4C60816FD2283002433F8 /* Foundation.framework */; };
 		B0F4C60B16FD2283002433F8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0F4C60A16FD2283002433F8 /* CoreGraphics.framework */; };
@@ -19,6 +21,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B084FAC916FDE5F80027BD8B /* FZViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FZViewController.h; path = Components/FZViewController.h; sourceTree = "<group>"; };
+		B084FACA16FDE5F80027BD8B /* FZViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FZViewController.m; path = Components/FZViewController.m; sourceTree = "<group>"; };
+		B084FACF16FDE62E0027BD8B /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainViewController.h; path = Controllers/MainViewController.h; sourceTree = "<group>"; };
+		B084FAD016FDE62E0027BD8B /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainViewController.m; path = Controllers/MainViewController.m; sourceTree = "<group>"; };
 		B0F4C60316FD2283002433F8 /* evasion.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = evasion.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0F4C60616FD2283002433F8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		B0F4C60816FD2283002433F8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -48,6 +54,45 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B084FAC416FDE43D0027BD8B /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				B084FACF16FDE62E0027BD8B /* MainViewController.h */,
+				B084FAD016FDE62E0027BD8B /* MainViewController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		B084FAC516FDE45E0027BD8B /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				B084FAC916FDE5F80027BD8B /* FZViewController.h */,
+				B084FACA16FDE5F80027BD8B /* FZViewController.m */,
+			);
+			name = Components;
+			sourceTree = "<group>";
+		};
+		B084FAC616FDE4650027BD8B /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Libraries;
+			sourceTree = "<group>";
+		};
+		B084FAC716FDE46C0027BD8B /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		B084FAC816FDE4720027BD8B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		B0F4C5FA16FD2283002433F8 = {
 			isa = PBXGroup;
 			children = (
@@ -78,6 +123,11 @@
 		B0F4C60C16FD2283002433F8 /* evasion */ = {
 			isa = PBXGroup;
 			children = (
+				B084FAC416FDE43D0027BD8B /* Controllers */,
+				B084FAC816FDE4720027BD8B /* Models */,
+				B084FAC516FDE45E0027BD8B /* Components */,
+				B084FAC616FDE4650027BD8B /* Libraries */,
+				B084FAC716FDE46C0027BD8B /* Resources */,
 				B0F4C61516FD2283002433F8 /* AppDelegate.h */,
 				B0F4C61616FD2283002433F8 /* AppDelegate.m */,
 				B0F4C60D16FD2283002433F8 /* Supporting Files */,
@@ -166,6 +216,8 @@
 			files = (
 				B0F4C61316FD2283002433F8 /* main.m in Sources */,
 				B0F4C61716FD2283002433F8 /* AppDelegate.m in Sources */,
+				B084FACB16FDE5F80027BD8B /* FZViewController.m in Sources */,
+				B084FAD116FDE62E0027BD8B /* MainViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -280,6 +332,7 @@
 				B0F4C62216FD2283002433F8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

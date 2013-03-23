@@ -11,5 +11,8 @@
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (strong, nonatomic) UINavigationController *mainNav;
+
+@property (assign, nonatomic) int mainScreeniPhone5;
 
 @end
