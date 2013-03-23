@@ -17,6 +17,9 @@
 		B084FAED16FDE9630027BD8B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B084FAEC16FDE9620027BD8B /* SystemConfiguration.framework */; };
 		B084FAEF16FDEAFE0027BD8B /* SDWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B084FAEE16FDEAFE0027BD8B /* SDWebImage.framework */; };
 		B084FAF116FDEB1D0027BD8B /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B084FAF016FDEB1D0027BD8B /* ImageIO.framework */; };
+		B084FAF916FDEC2C0027BD8B /* IISideController.m in Sources */ = {isa = PBXBuildFile; fileRef = B084FAF416FDEC2C0027BD8B /* IISideController.m */; };
+		B084FAFA16FDEC2C0027BD8B /* IIViewDeckController.m in Sources */ = {isa = PBXBuildFile; fileRef = B084FAF616FDEC2C0027BD8B /* IIViewDeckController.m */; };
+		B084FAFB16FDEC2C0027BD8B /* IIWrapController.m in Sources */ = {isa = PBXBuildFile; fileRef = B084FAF816FDEC2C0027BD8B /* IIWrapController.m */; };
 		B0F4C60716FD2283002433F8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0F4C60616FD2283002433F8 /* UIKit.framework */; };
 		B0F4C60916FD2283002433F8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0F4C60816FD2283002433F8 /* Foundation.framework */; };
 		B0F4C60B16FD2283002433F8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0F4C60A16FD2283002433F8 /* CoreGraphics.framework */; };
@@ -79,6 +82,12 @@
 		B084FAEC16FDE9620027BD8B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		B084FAEE16FDEAFE0027BD8B /* SDWebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDWebImage.framework; path = Librarie/SDWebImage.framework; sourceTree = "<group>"; };
 		B084FAF016FDEB1D0027BD8B /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		B084FAF316FDEC2C0027BD8B /* IISideController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IISideController.h; sourceTree = "<group>"; };
+		B084FAF416FDEC2C0027BD8B /* IISideController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IISideController.m; sourceTree = "<group>"; };
+		B084FAF516FDEC2C0027BD8B /* IIViewDeckController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IIViewDeckController.h; sourceTree = "<group>"; };
+		B084FAF616FDEC2C0027BD8B /* IIViewDeckController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IIViewDeckController.m; sourceTree = "<group>"; };
+		B084FAF716FDEC2C0027BD8B /* IIWrapController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IIWrapController.h; sourceTree = "<group>"; };
+		B084FAF816FDEC2C0027BD8B /* IIWrapController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IIWrapController.m; sourceTree = "<group>"; };
 		B0F4C60316FD2283002433F8 /* evasion.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = evasion.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0F4C60616FD2283002433F8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		B0F4C60816FD2283002433F8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -137,6 +146,7 @@
 		B084FAC616FDE4650027BD8B /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				B084FAF216FDEC2C0027BD8B /* ViewDeck */,
 				B084FAEE16FDEAFE0027BD8B /* SDWebImage.framework */,
 				B084FAD216FDE8270027BD8B /* RestKit.xcodeproj */,
 			);
@@ -166,6 +176,20 @@
 				B084FAE016FDE8280027BD8B /* RestKitFrameworkTests.octest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		B084FAF216FDEC2C0027BD8B /* ViewDeck */ = {
+			isa = PBXGroup;
+			children = (
+				B084FAF316FDEC2C0027BD8B /* IISideController.h */,
+				B084FAF416FDEC2C0027BD8B /* IISideController.m */,
+				B084FAF516FDEC2C0027BD8B /* IIViewDeckController.h */,
+				B084FAF616FDEC2C0027BD8B /* IIViewDeckController.m */,
+				B084FAF716FDEC2C0027BD8B /* IIWrapController.h */,
+				B084FAF816FDEC2C0027BD8B /* IIWrapController.m */,
+			);
+			name = ViewDeck;
+			path = Librarie/ViewDeck;
 			sourceTree = "<group>";
 		};
 		B0F4C5FA16FD2283002433F8 = {
@@ -337,6 +361,9 @@
 				B0F4C61716FD2283002433F8 /* AppDelegate.m in Sources */,
 				B084FACB16FDE5F80027BD8B /* FZViewController.m in Sources */,
 				B084FAD116FDE62E0027BD8B /* MainViewController.m in Sources */,
+				B084FAF916FDEC2C0027BD8B /* IISideController.m in Sources */,
+				B084FAFA16FDEC2C0027BD8B /* IIViewDeckController.m in Sources */,
+				B084FAFB16FDEC2C0027BD8B /* IIWrapController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
