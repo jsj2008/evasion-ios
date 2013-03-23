@@ -8,6 +8,8 @@
 
 #import "FZViewController.h"
 
+#import <RestKit/RestKit.h>
+
 @interface MainViewController : FZViewController
 
 @end
