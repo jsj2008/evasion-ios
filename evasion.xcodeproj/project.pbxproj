@@ -15,6 +15,8 @@
 		B084FAE916FDE9530027BD8B /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B084FAE816FDE9530027BD8B /* MobileCoreServices.framework */; };
 		B084FAEB16FDE95C0027BD8B /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B084FAEA16FDE95B0027BD8B /* Security.framework */; };
 		B084FAED16FDE9630027BD8B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B084FAEC16FDE9620027BD8B /* SystemConfiguration.framework */; };
+		B084FAEF16FDEAFE0027BD8B /* SDWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B084FAEE16FDEAFE0027BD8B /* SDWebImage.framework */; };
+		B084FAF116FDEB1D0027BD8B /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B084FAF016FDEB1D0027BD8B /* ImageIO.framework */; };
 		B0F4C60716FD2283002433F8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0F4C60616FD2283002433F8 /* UIKit.framework */; };
 		B0F4C60916FD2283002433F8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0F4C60816FD2283002433F8 /* Foundation.framework */; };
 		B0F4C60B16FD2283002433F8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0F4C60A16FD2283002433F8 /* CoreGraphics.framework */; };
@@ -75,6 +77,8 @@
 		B084FAE816FDE9530027BD8B /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		B084FAEA16FDE95B0027BD8B /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		B084FAEC16FDE9620027BD8B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		B084FAEE16FDEAFE0027BD8B /* SDWebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDWebImage.framework; path = Librarie/SDWebImage.framework; sourceTree = "<group>"; };
+		B084FAF016FDEB1D0027BD8B /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		B0F4C60316FD2283002433F8 /* evasion.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = evasion.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0F4C60616FD2283002433F8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		B0F4C60816FD2283002433F8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -95,6 +99,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B084FAF116FDEB1D0027BD8B /* ImageIO.framework in Frameworks */,
 				B084FAED16FDE9630027BD8B /* SystemConfiguration.framework in Frameworks */,
 				B084FAEB16FDE95C0027BD8B /* Security.framework in Frameworks */,
 				B084FAE916FDE9530027BD8B /* MobileCoreServices.framework in Frameworks */,
@@ -104,6 +109,7 @@
 				B0F4C60716FD2283002433F8 /* UIKit.framework in Frameworks */,
 				B0F4C60916FD2283002433F8 /* Foundation.framework in Frameworks */,
 				B0F4C60B16FD2283002433F8 /* CoreGraphics.framework in Frameworks */,
+				B084FAEF16FDEAFE0027BD8B /* SDWebImage.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -131,6 +137,7 @@
 		B084FAC616FDE4650027BD8B /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				B084FAEE16FDEAFE0027BD8B /* SDWebImage.framework */,
 				B084FAD216FDE8270027BD8B /* RestKit.xcodeproj */,
 			);
 			name = Libraries;
@@ -164,11 +171,6 @@
 		B0F4C5FA16FD2283002433F8 = {
 			isa = PBXGroup;
 			children = (
-				B084FAEC16FDE9620027BD8B /* SystemConfiguration.framework */,
-				B084FAEA16FDE95B0027BD8B /* Security.framework */,
-				B084FAE816FDE9530027BD8B /* MobileCoreServices.framework */,
-				B084FAE616FDE94B0027BD8B /* CoreData.framework */,
-				B084FAE416FDE9440027BD8B /* CFNetwork.framework */,
 				B0F4C60C16FD2283002433F8 /* evasion */,
 				B0F4C60516FD2283002433F8 /* Frameworks */,
 				B0F4C60416FD2283002433F8 /* Products */,
@@ -186,6 +188,12 @@
 		B0F4C60516FD2283002433F8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B084FAF016FDEB1D0027BD8B /* ImageIO.framework */,
+				B084FAEC16FDE9620027BD8B /* SystemConfiguration.framework */,
+				B084FAEA16FDE95B0027BD8B /* Security.framework */,
+				B084FAE816FDE9530027BD8B /* MobileCoreServices.framework */,
+				B084FAE616FDE94B0027BD8B /* CoreData.framework */,
+				B084FAE416FDE9440027BD8B /* CFNetwork.framework */,
 				B0F4C60616FD2283002433F8 /* UIKit.framework */,
 				B0F4C60816FD2283002433F8 /* Foundation.framework */,
 				B0F4C60A16FD2283002433F8 /* CoreGraphics.framework */,
@@ -413,6 +421,10 @@
 		B0F4C62116FD2283002433F8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/evasion/Librarie\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "evasion/evasion-Prefix.pch";
 				HEADER_SEARCH_PATHS = "\"$(BUILT_PRODUCTS_DIR)/../../Headers\"";
@@ -426,6 +438,10 @@
 		B0F4C62216FD2283002433F8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/evasion/Librarie\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "evasion/evasion-Prefix.pch";
 				HEADER_SEARCH_PATHS = "\"$(BUILT_PRODUCTS_DIR)/../../Headers\"";

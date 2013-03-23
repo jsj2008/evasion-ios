@@ -10,6 +10,8 @@
 
 #import <RestKit/RestKit.h>
 
+#import <SDWebImage/UIImageView+WebCache.h>
+
 @interface MainViewController : FZViewController
 
 @end
