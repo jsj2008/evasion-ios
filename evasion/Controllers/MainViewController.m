@@ -199,6 +199,34 @@ static int image_padding_bottom = 55;
     [likes.layer setCornerRadius:2.0];
     [cell addSubview:likes];
     
+    // Like icon
+    UIImageView *likesIcon = [[UIImageView alloc] initWithFrame:CGRectMake(5, 6, 13, 11)];
+    [likesIcon setImage:[UIImage imageNamed:@"like-darkgrey.png"]];
+    [likes addSubview:likesIcon];
+    
+    // Like count format to String
+    NSString *likesCountString;
+    if(post.likes > 9999){
+        NSString *likesString = [NSString stringWithFormat:@"%d", post.likes];
+        likesCountString = [NSString stringWithFormat:@"%@k", [likesString substringToIndex:likesString.length-3]];
+    }
+    else{
+        likesCountString = [NSString stringWithFormat:@"%d", post.likes];
+    }
+    
+    // Like count
+    UILabel *likeCount = [[UILabel alloc] initWithFrame:CGRectMake(22, 4, 33, 15)];
+    [likeCount setText:likesCountString];
+    [likeCount setFont:[UIFont fontWithName:@"Helvetica-Bold" size:12]];
+    [likeCount setTextColor:[UIColor colorWithRed:112.0/255.0 green:111.0/255.0 blue:111.0/255.0 alpha:1.0]];
+    [likeCount setTextAlignment:NSTextAlignmentCenter];
+    [likeCount setBackgroundColor:[UIColor clearColor]];
+    //[likeCount sizeToFit];
+    //float likeCountWidth = likeCount.frame.size.width;
+    //[likeCount setFrame:CGRectMake(60-5-likeCountWidth, 4, likeCountWidth, likeCount.frame.size.height)];
+    [likes addSubview:likeCount];
+    
+    
     // Date
     int dateY = image.frame.origin.y + image.frame.size.height + 14;
     UILabel *date = [[UILabel alloc] initWithFrame:CGRectMake(170, dateY, 140, 20)];
