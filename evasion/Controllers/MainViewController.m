@@ -7,6 +7,20 @@
 //
 
 #import "MainViewController.h"
+#import "PostViewController.h"
+
+#import <QuartzCore/QuartzCore.h>
+#import <SDWebImage/UIButton+WebCache.h>
+
+#import "FZDate.h"
+#import "FZImage.h"
+
+#import "Post.h"
+#import "Image.h"
+
+static int image_with = 300;
+static int image_padding_top = 10;
+static int image_padding_bottom = 55;
 
 @interface MainViewController ()
 
@@ -17,8 +31,10 @@
 - (id)init{
     self = [super init];
     if (self) {
+        self.view.backgroundColor = [UIColor whiteColor];
+        self.title = @"EVASION";
         
-        self.view.backgroundColor = [UIColor lightGrayColor];
+        self.navigationItem.leftBarButtonItem = [self buttonSignin];
     }
     return self;
 }
@@ -26,13 +42,210 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+	
+    int tableViewSizeHeight = 416;
+    if(sharedAppDelegate.mainScreeniPhone5){
+        tableViewSizeHeight += 88;
+    }
+    
+    // TableView
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, tableViewSizeHeight)];
+    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    [self.tableView setBackgroundColor:[UIColor clearColor]];
+    [self.tableView setDataSource:self];
+    [self.tableView setDelegate:self];
+    [self.view addSubview:self.tableView];
+    
+    // TableView RefreshControl
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(refreshData) forControlEvents:UIControlEventValueChanged];
+    [self.refreshControl setTintColor:[UIColor colorWithRed:112.0/255.0 green:112.0/255.0 blue:112.0/255.0 alpha:1.0]];
+    [self.tableView addSubview:self.refreshControl];
+    
+    
+    RKObjectMapping *postMapping = [RKObjectMapping mappingForClass:[Post class]];
+    [postMapping addAttributeMappingsFromDictionary:@{
+        @"id":@"post_id",
+        @"timestamp":@"timestamp",
+        @"short_url":@"shortURL",
+        @"note_count":@"likes",
+        @"photos.alt_sizes":@"images"
+
+     }];
+    
+    
+    RKObjectMapping *imageMapping = [RKObjectMapping mappingForClass:[Image class]];
+    [imageMapping addAttributeMappingsFromDictionary:@{
+        @"url":@"image",
+        @"width":@"width",
+        @"height":@"height"
+    }];
+    
+        
+    //RKRelationshipMapping* relationShipMapping = [RKRelationshipMapping relationshipMappingFromKeyPath:@"photos.alt_sizes" toKeyPath:@"images" withMapping:imageMapping];
+    // [postMapping addPropertyMapping:relationShipMapping];
+    
+    RKResponseDescriptor *responseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:postMapping pathPattern:nil keyPath:@"response.posts" statusCodes:nil];
+    NSURL *url = [NSURL URLWithString:@"http://api.tumblr.com/v2/blog/summerevasion.tumblr.com/posts/photo?api_key=GCBoybPwsGdolRRM8ZnnoV8R8BYdmo5STjVSwFHsfoLqCeSVdC"];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    RKObjectRequestOperation *operation = [[RKObjectRequestOperation alloc] initWithRequest:request responseDescriptors:@[responseDescriptor]];
+    [operation setCompletionBlockWithSuccess:^(RKObjectRequestOperation *operation, RKMappingResult *result) {
+        //NSLog(@"Data result: %@", [result array]);
+        
+        [self dataLoaded:[result array]];
+
+    } failure:^(RKObjectRequestOperation *operation, NSError *error) {
+        NSLog(@"Loaded this error: %@", [error localizedDescription]);
+    }];
+    [operation start];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)dataLoaded:(NSArray*)dataResult{
+    
+    NSMutableArray *data = [[NSMutableArray alloc] init];
+    
+    for (Post *post in dataResult) {
+        NSDictionary *imageLarge = [[post.images objectAtIndex:0] objectAtIndex:0];
+        
+        int widthOrigin = [[imageLarge objectForKey:@"width"] intValue] / 2;
+        int heightOrigin = [[imageLarge objectForKey:@"height"] intValue] / 2;
+        
+        float coef = (float)image_with / (float)widthOrigin;
+        
+        // Image new size
+        int width = widthOrigin * coef;
+        int height = heightOrigin * coef;
+        
+        Image *image = [[Image alloc] init];
+        [image setUrl:[imageLarge objectForKey:@"url"]];
+        [image setWidth:width];
+        [image setHeight:height];
+        [post setImage:image];
+        
+        [data addObject:post];
+    }
+    
+    //self.data = [data arrayByAddingObjectsFromArray:data];
+    self.data = data;
+    
+    [self.tableView reloadData];
+}
+
+- (void)refreshData{
+    [self.refreshControl endRefreshing];
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    
+    if(self.data.count > 0){
+        return self.data.count + 1;
+    }
+    else{
+        return 0;
+    }
+    
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    static NSString *CellIdentifier = @"Cell";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+    }
+
+    
+    if(indexPath.row == self.data.count){
+        UIActivityIndicatorView *activity = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(150, 14, 20, 20)];
+        [activity setBackgroundColor:[UIColor clearColor]];
+        [activity setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleGray];
+        [activity startAnimating];
+        
+        [cell addSubview:activity];
+        
+        return cell;
+    }
+    
+    
+    Post *post = [self.data objectAtIndex:indexPath.row];
+    
+    // Cell selection
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    [cell setBackgroundColor:[UIColor clearColor]];
+    
+    // Image
+    UIButton *image = [[UIButton alloc] initWithFrame:CGRectMake(10, image_padding_top, post.image.width, post.image.height)];
+    [image setBackgroundImageWithURL:[NSURL URLWithString:post.image.url] forState:UIControlStateNormal placeholderImage:[FZImage imageWithColor:[UIColor colorWithRed:238.0/255.0 green:238.0/255.0 blue:238.0/255.0 alpha:1.0]]];
+    [image addTarget:self action:@selector(actionPost:) forControlEvents:UIControlEventTouchUpInside];
+    [image setTag:indexPath.row];
+    [cell addSubview:image];
+    
+    // Likes
+    int likesY = image.frame.origin.y + image.frame.size.height + 9;
+    UIButton *likes = [[UIButton alloc] initWithFrame:CGRectMake(10, likesY, 60, 22)];
+    [likes setBackgroundColor:[UIColor colorWithRed:238.0/255.0 green:238.0/255.0 blue:238.0/255.0 alpha:1.0]];
+    [likes.layer setCornerRadius:2.0];
+    [cell addSubview:likes];
+    
+    // Date
+    int dateY = image.frame.origin.y + image.frame.size.height + 14;
+    UILabel *date = [[UILabel alloc] initWithFrame:CGRectMake(170, dateY, 140, 20)];
+    [date setText:[FZDate timeSinceAtToday:post.timestamp]];
+    [date setFont:[UIFont fontWithName:@"Helvetica-Bold" size:12]];
+    [date setTextColor:[UIColor colorWithRed:204.0/255.0 green:204.0/255.0 blue:204.0/255.0 alpha:1.0]];
+    [date setTextAlignment:NSTextAlignmentRight];
+    [date setBackgroundColor:[UIColor clearColor]];
+    [date sizeToFit];
+    float dateWidth = date.frame.size.width;
+    [date setFrame:CGRectMake(320-10-dateWidth, dateY, dateWidth, date.frame.size.height)];
+    [cell addSubview:date];
+    
+    // Date icon
+    int dateIconX = date.frame.origin.x - 5 - 10;
+    int dateIconY = dateY + 3;
+    UIImageView *dateIcon = [[UIImageView alloc] initWithFrame:CGRectMake(dateIconX, dateIconY, 10, 10)];
+    [dateIcon setImage:[UIImage imageNamed:@"date.png"]];
+    [cell addSubview:dateIcon];
+    
+    
+    NSLog(@"%d", post.likes);
+    
+    return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if(indexPath.row == self.data.count){
+        return 48;
+    }
+    else{
+        Post *post = [self.data objectAtIndex:indexPath.row];
+        
+        int height = post.image.height + image_padding_top + image_padding_bottom;
+        
+        return height;
+    }
+}
+
+- (void)actionPost:(id)sender{
+    UIButton *source = (UIButton *)sender;
+    
+    Post *post = [self.data objectAtIndex:source.tag];
+    
+    PostViewController *postView = [[PostViewController alloc] initWithPost:post];
+    [self.navigationController pushViewController:postView animated:YES];
 }
 
 @end

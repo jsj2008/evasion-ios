@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 
+#import "IIViewDeckController.h"
+
 #import "MainViewController.h"
 
 @implementation AppDelegate
@@ -24,6 +26,9 @@
     else{
         self.mainScreeniPhone5 = NO;
     }
+    
+    // RestKit Activity
+    [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
     
     MainViewController *mainView = [[MainViewController alloc] init];
     self.mainNav = [[UINavigationController alloc] initWithRootViewController:mainView];

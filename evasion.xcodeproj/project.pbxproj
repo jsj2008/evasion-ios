@@ -20,6 +20,19 @@
 		B084FAF916FDEC2C0027BD8B /* IISideController.m in Sources */ = {isa = PBXBuildFile; fileRef = B084FAF416FDEC2C0027BD8B /* IISideController.m */; };
 		B084FAFA16FDEC2C0027BD8B /* IIViewDeckController.m in Sources */ = {isa = PBXBuildFile; fileRef = B084FAF616FDEC2C0027BD8B /* IIViewDeckController.m */; };
 		B084FAFB16FDEC2C0027BD8B /* IIWrapController.m in Sources */ = {isa = PBXBuildFile; fileRef = B084FAF816FDEC2C0027BD8B /* IIWrapController.m */; };
+		B084FB0016FDEE300027BD8B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B084FAFF16FDEE300027BD8B /* QuartzCore.framework */; };
+		B084FB0A16FE00750027BD8B /* Gibson-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = B084FB0816FDFC5B0027BD8B /* Gibson-SemiBold.otf */; };
+		B084FB1316FE22870027BD8B /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = B084FB1216FE22870027BD8B /* Post.m */; };
+		B084FB1616FE43120027BD8B /* Image.m in Sources */ = {isa = PBXBuildFile; fileRef = B084FB1516FE43120027BD8B /* Image.m */; };
+		B084FB1916FE63A40027BD8B /* FZImage.m in Sources */ = {isa = PBXBuildFile; fileRef = B084FB1816FE63A40027BD8B /* FZImage.m */; };
+		B084FB1F16FE6E3F0027BD8B /* PostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B084FB1E16FE6E3F0027BD8B /* PostViewController.m */; };
+		B084FB2316FE7B3D0027BD8B /* FZDate.m in Sources */ = {isa = PBXBuildFile; fileRef = B084FB2216FE7B3D0027BD8B /* FZDate.m */; };
+		B084FB2A16FE83C50027BD8B /* date.png in Resources */ = {isa = PBXBuildFile; fileRef = B084FB2816FE83C50027BD8B /* date.png */; };
+		B084FB2B16FE83C50027BD8B /* date@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B084FB2916FE83C50027BD8B /* date@2x.png */; };
+		B084FB3016FE93970027BD8B /* nav-back.png in Resources */ = {isa = PBXBuildFile; fileRef = B084FB2C16FE93970027BD8B /* nav-back.png */; };
+		B084FB3116FE93970027BD8B /* nav-back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B084FB2D16FE93970027BD8B /* nav-back@2x.png */; };
+		B084FB3216FE93970027BD8B /* nav-home.png in Resources */ = {isa = PBXBuildFile; fileRef = B084FB2E16FE93970027BD8B /* nav-home.png */; };
+		B084FB3316FE93970027BD8B /* nav-home@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B084FB2F16FE93970027BD8B /* nav-home@2x.png */; };
 		B0F4C60716FD2283002433F8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0F4C60616FD2283002433F8 /* UIKit.framework */; };
 		B0F4C60916FD2283002433F8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0F4C60816FD2283002433F8 /* Foundation.framework */; };
 		B0F4C60B16FD2283002433F8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0F4C60A16FD2283002433F8 /* CoreGraphics.framework */; };
@@ -88,6 +101,24 @@
 		B084FAF616FDEC2C0027BD8B /* IIViewDeckController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IIViewDeckController.m; sourceTree = "<group>"; };
 		B084FAF716FDEC2C0027BD8B /* IIWrapController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IIWrapController.h; sourceTree = "<group>"; };
 		B084FAF816FDEC2C0027BD8B /* IIWrapController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IIWrapController.m; sourceTree = "<group>"; };
+		B084FAFF16FDEE300027BD8B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		B084FB0816FDFC5B0027BD8B /* Gibson-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Gibson-SemiBold.otf"; path = "Resources/Fonts/Gibson-SemiBold.otf"; sourceTree = "<group>"; };
+		B084FB1116FE22870027BD8B /* Post.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Post.h; path = Models/Post.h; sourceTree = "<group>"; };
+		B084FB1216FE22870027BD8B /* Post.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Post.m; path = Models/Post.m; sourceTree = "<group>"; };
+		B084FB1416FE43120027BD8B /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Image.h; path = Models/Image.h; sourceTree = "<group>"; };
+		B084FB1516FE43120027BD8B /* Image.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Image.m; path = Models/Image.m; sourceTree = "<group>"; };
+		B084FB1716FE63A40027BD8B /* FZImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FZImage.h; path = Components/FZImage.h; sourceTree = "<group>"; };
+		B084FB1816FE63A40027BD8B /* FZImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FZImage.m; path = Components/FZImage.m; sourceTree = "<group>"; };
+		B084FB1D16FE6E3F0027BD8B /* PostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PostViewController.h; path = Controllers/PostViewController.h; sourceTree = "<group>"; };
+		B084FB1E16FE6E3F0027BD8B /* PostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PostViewController.m; path = Controllers/PostViewController.m; sourceTree = "<group>"; };
+		B084FB2116FE7B3D0027BD8B /* FZDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FZDate.h; path = Components/FZDate.h; sourceTree = "<group>"; };
+		B084FB2216FE7B3D0027BD8B /* FZDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FZDate.m; path = Components/FZDate.m; sourceTree = "<group>"; };
+		B084FB2816FE83C50027BD8B /* date.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = date.png; path = Resources/Assets/date.png; sourceTree = "<group>"; };
+		B084FB2916FE83C50027BD8B /* date@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "date@2x.png"; path = "Resources/Assets/date@2x.png"; sourceTree = "<group>"; };
+		B084FB2C16FE93970027BD8B /* nav-back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "nav-back.png"; path = "Resources/Assets/nav-back.png"; sourceTree = "<group>"; };
+		B084FB2D16FE93970027BD8B /* nav-back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "nav-back@2x.png"; path = "Resources/Assets/nav-back@2x.png"; sourceTree = "<group>"; };
+		B084FB2E16FE93970027BD8B /* nav-home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "nav-home.png"; path = "Resources/Assets/nav-home.png"; sourceTree = "<group>"; };
+		B084FB2F16FE93970027BD8B /* nav-home@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "nav-home@2x.png"; path = "Resources/Assets/nav-home@2x.png"; sourceTree = "<group>"; };
 		B0F4C60316FD2283002433F8 /* evasion.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = evasion.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0F4C60616FD2283002433F8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		B0F4C60816FD2283002433F8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -108,6 +139,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B084FB0016FDEE300027BD8B /* QuartzCore.framework in Frameworks */,
 				B084FAF116FDEB1D0027BD8B /* ImageIO.framework in Frameworks */,
 				B084FAED16FDE9630027BD8B /* SystemConfiguration.framework in Frameworks */,
 				B084FAEB16FDE95C0027BD8B /* Security.framework in Frameworks */,
@@ -130,6 +162,8 @@
 			children = (
 				B084FACF16FDE62E0027BD8B /* MainViewController.h */,
 				B084FAD016FDE62E0027BD8B /* MainViewController.m */,
+				B084FB1D16FE6E3F0027BD8B /* PostViewController.h */,
+				B084FB1E16FE6E3F0027BD8B /* PostViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -139,6 +173,10 @@
 			children = (
 				B084FAC916FDE5F80027BD8B /* FZViewController.h */,
 				B084FACA16FDE5F80027BD8B /* FZViewController.m */,
+				B084FB1716FE63A40027BD8B /* FZImage.h */,
+				B084FB1816FE63A40027BD8B /* FZImage.m */,
+				B084FB2116FE7B3D0027BD8B /* FZDate.h */,
+				B084FB2216FE7B3D0027BD8B /* FZDate.m */,
 			);
 			name = Components;
 			sourceTree = "<group>";
@@ -156,6 +194,8 @@
 		B084FAC716FDE46C0027BD8B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B084FB2716FE83B50027BD8B /* Assets */,
+				B084FB0116FDFC1E0027BD8B /* Fonts */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -163,6 +203,10 @@
 		B084FAC816FDE4720027BD8B /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				B084FB1116FE22870027BD8B /* Post.h */,
+				B084FB1216FE22870027BD8B /* Post.m */,
+				B084FB1416FE43120027BD8B /* Image.h */,
+				B084FB1516FE43120027BD8B /* Image.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -192,6 +236,27 @@
 			path = Librarie/ViewDeck;
 			sourceTree = "<group>";
 		};
+		B084FB0116FDFC1E0027BD8B /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				B084FB0816FDFC5B0027BD8B /* Gibson-SemiBold.otf */,
+			);
+			name = Fonts;
+			sourceTree = "<group>";
+		};
+		B084FB2716FE83B50027BD8B /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				B084FB2816FE83C50027BD8B /* date.png */,
+				B084FB2916FE83C50027BD8B /* date@2x.png */,
+				B084FB2C16FE93970027BD8B /* nav-back.png */,
+				B084FB2D16FE93970027BD8B /* nav-back@2x.png */,
+				B084FB2E16FE93970027BD8B /* nav-home.png */,
+				B084FB2F16FE93970027BD8B /* nav-home@2x.png */,
+			);
+			name = Assets;
+			sourceTree = "<group>";
+		};
 		B0F4C5FA16FD2283002433F8 = {
 			isa = PBXGroup;
 			children = (
@@ -212,6 +277,7 @@
 		B0F4C60516FD2283002433F8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B084FAFF16FDEE300027BD8B /* QuartzCore.framework */,
 				B084FAF016FDEB1D0027BD8B /* ImageIO.framework */,
 				B084FAEC16FDE9620027BD8B /* SystemConfiguration.framework */,
 				B084FAEA16FDE95B0027BD8B /* Security.framework */,
@@ -343,10 +409,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B084FB0A16FE00750027BD8B /* Gibson-SemiBold.otf in Resources */,
 				B0F4C61116FD2283002433F8 /* InfoPlist.strings in Resources */,
 				B0F4C61916FD2283002433F8 /* Default.png in Resources */,
 				B0F4C61B16FD2283002433F8 /* Default@2x.png in Resources */,
 				B0F4C61D16FD2283002433F8 /* Default-568h@2x.png in Resources */,
+				B084FB2A16FE83C50027BD8B /* date.png in Resources */,
+				B084FB2B16FE83C50027BD8B /* date@2x.png in Resources */,
+				B084FB3016FE93970027BD8B /* nav-back.png in Resources */,
+				B084FB3116FE93970027BD8B /* nav-back@2x.png in Resources */,
+				B084FB3216FE93970027BD8B /* nav-home.png in Resources */,
+				B084FB3316FE93970027BD8B /* nav-home@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -364,6 +437,11 @@
 				B084FAF916FDEC2C0027BD8B /* IISideController.m in Sources */,
 				B084FAFA16FDEC2C0027BD8B /* IIViewDeckController.m in Sources */,
 				B084FAFB16FDEC2C0027BD8B /* IIWrapController.m in Sources */,
+				B084FB1316FE22870027BD8B /* Post.m in Sources */,
+				B084FB1616FE43120027BD8B /* Image.m in Sources */,
+				B084FB1916FE63A40027BD8B /* FZImage.m in Sources */,
+				B084FB1F16FE6E3F0027BD8B /* PostViewController.m in Sources */,
+				B084FB2316FE7B3D0027BD8B /* FZDate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

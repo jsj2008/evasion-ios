@@ -10,8 +10,11 @@
 
 #import <RestKit/RestKit.h>
 
-#import <SDWebImage/UIImageView+WebCache.h>
+@interface MainViewController : FZViewController <UITableViewDelegate, UITableViewDataSource>
 
-@interface MainViewController : FZViewController
+@property (strong, nonatomic) UITableView *tableView;
+@property (strong, nonatomic) UIRefreshControl *refreshControl;
+
+@property (strong, nonatomic) NSArray *data;
 
 @end

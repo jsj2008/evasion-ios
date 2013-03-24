@@ -1,5 +1,5 @@
 //
-//  FZViewController.h
+//  FZImage.h
 //  evasion
 //
 //  Created by Aymeric on 23/03/13.
@@ -8,9 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FZViewController : UIViewController
+@interface FZImage : UIImage
 
-- (UIBarButtonItem *)buttonSignin;
-- (UIBarButtonItem *)buttonBack;
++ (UIImage *)imageWithColor:(UIColor *)color;
 
 @end
