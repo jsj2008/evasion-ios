@@ -27,9 +27,6 @@
         self.mainScreeniPhone5 = NO;
     }
     
-    // RestKit Activity
-    [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
-    
     MainViewController *mainView = [[MainViewController alloc] init];
     self.mainNav = [[UINavigationController alloc] initWithRootViewController:mainView];
     

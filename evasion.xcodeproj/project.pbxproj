@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B0005B5316FF5D64008BE290 /* Info.m in Sources */ = {isa = PBXBuildFile; fileRef = B0005B5216FF5D64008BE290 /* Info.m */; };
 		B084FACB16FDE5F80027BD8B /* FZViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B084FACA16FDE5F80027BD8B /* FZViewController.m */; };
 		B084FAD116FDE62E0027BD8B /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B084FAD016FDE62E0027BD8B /* MainViewController.m */; };
 		B084FAE316FDE9380027BD8B /* libRestKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B084FADA16FDE8280027BD8B /* libRestKit.a */; };
@@ -85,6 +86,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B0005B5116FF5D64008BE290 /* Info.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Info.h; path = Models/Info.h; sourceTree = "<group>"; };
+		B0005B5216FF5D64008BE290 /* Info.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Info.m; path = Models/Info.m; sourceTree = "<group>"; };
 		B084FAC916FDE5F80027BD8B /* FZViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FZViewController.h; path = Components/FZViewController.h; sourceTree = "<group>"; };
 		B084FACA16FDE5F80027BD8B /* FZViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FZViewController.m; path = Components/FZViewController.m; sourceTree = "<group>"; };
 		B084FACF16FDE62E0027BD8B /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainViewController.h; path = Controllers/MainViewController.h; sourceTree = "<group>"; };
@@ -211,6 +214,8 @@
 				B084FB1216FE22870027BD8B /* Post.m */,
 				B084FB1416FE43120027BD8B /* Image.h */,
 				B084FB1516FE43120027BD8B /* Image.m */,
+				B0005B5116FF5D64008BE290 /* Info.h */,
+				B0005B5216FF5D64008BE290 /* Info.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -450,6 +455,7 @@
 				B084FB1916FE63A40027BD8B /* FZImage.m in Sources */,
 				B084FB1F16FE6E3F0027BD8B /* PostViewController.m in Sources */,
 				B084FB2316FE7B3D0027BD8B /* FZDate.m in Sources */,
+				B0005B5316FF5D64008BE290 /* Info.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

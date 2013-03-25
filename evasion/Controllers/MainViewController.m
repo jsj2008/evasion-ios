@@ -15,12 +15,22 @@
 #import "FZDate.h"
 #import "FZImage.h"
 
+#import "Info.h"
 #import "Post.h"
 #import "Image.h"
 
 static int image_with = 300;
 static int image_padding_top = 10;
 static int image_padding_bottom = 55;
+
+static NSString *api_base = @"https://api.tumblr.com";
+static NSString *api_endpoint_posts = @"/v2/blog/summerevasion.tumblr.com/posts/photo";
+static NSString *api_endpoint_info = @"/v2/blog/summerevasion.tumblr.com/info";
+
+static NSString *api_key = @"GCBoybPwsGdolRRM8ZnnoV8R8BYdmo5STjVSwFHsfoLqCeSVdC";
+
+static int posts_limit = 10;
+static int post_offset_start = 0;
 
 @interface MainViewController ()
 
@@ -58,9 +68,19 @@ static int image_padding_bottom = 55;
     
     // TableView RefreshControl
     self.refreshControl = [[UIRefreshControl alloc] init];
-    [self.refreshControl addTarget:self action:@selector(refreshData) forControlEvents:UIControlEventValueChanged];
+    [self.refreshControl addTarget:self action:@selector(getRefreshPost) forControlEvents:UIControlEventValueChanged];
     [self.refreshControl setTintColor:[UIColor colorWithRed:112.0/255.0 green:112.0/255.0 blue:112.0/255.0 alpha:1.0]];
     [self.tableView addSubview:self.refreshControl];
+    
+    
+    
+    //let AFNetworking manage the activity indicator
+    [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
+    
+    
+    AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:api_base]];
+    RKObjectManager *manager = [[RKObjectManager alloc] initWithHTTPClient:client];
+    
     
     
     RKObjectMapping *postMapping = [RKObjectMapping mappingForClass:[Post class]];
@@ -85,19 +105,92 @@ static int image_padding_bottom = 55;
     //RKRelationshipMapping* relationShipMapping = [RKRelationshipMapping relationshipMappingFromKeyPath:@"photos.alt_sizes" toKeyPath:@"images" withMapping:imageMapping];
     // [postMapping addPropertyMapping:relationShipMapping];
     
-    RKResponseDescriptor *responseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:postMapping pathPattern:nil keyPath:@"response.posts" statusCodes:nil];
-    NSURL *url = [NSURL URLWithString:@"http://api.tumblr.com/v2/blog/summerevasion.tumblr.com/posts/photo?api_key=GCBoybPwsGdolRRM8ZnnoV8R8BYdmo5STjVSwFHsfoLqCeSVdC"];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    RKObjectRequestOperation *operation = [[RKObjectRequestOperation alloc] initWithRequest:request responseDescriptors:@[responseDescriptor]];
-    [operation setCompletionBlockWithSuccess:^(RKObjectRequestOperation *operation, RKMappingResult *result) {
-        //NSLog(@"Data result: %@", [result array]);
-        
-        [self dataLoaded:[result array]];
+    RKResponseDescriptor *responseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:postMapping pathPattern:api_endpoint_posts keyPath:@"response.posts" statusCodes:[NSIndexSet indexSetWithIndex:200]];
+    
+    RKObjectMapping *infoMapping = [RKObjectMapping mappingForClass:[Info class]];
+    [infoMapping addAttributeMappingsFromArray:@[@"posts"]];
+    RKResponseDescriptor *infoResponseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:infoMapping pathPattern:api_endpoint_info keyPath:@"response.blog" statusCodes:nil];
+    [manager addResponseDescriptor:infoResponseDescriptor];
+    
+    [manager addResponseDescriptor:responseDescriptor];
+    
+    
+    
+    [self networkStatus];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self getBlogInfo];
+    });
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self getPosts];
+    });
+}
 
-    } failure:^(RKObjectRequestOperation *operation, NSError *error) {
+- (void)networkStatus{
+    RKObjectManager *objectManager = [RKObjectManager sharedManager];
+    
+    // No network detect
+    [objectManager.HTTPClient setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        if (status == AFNetworkReachabilityStatusNotReachable) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No network connection"
+                                                            message:@"You must be connected to the internet to use this app."
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+            [alert show];
+        }
+    }];
+}
+- (void)getBlogInfo{
+    
+    RKObjectManager *objectManager = [RKObjectManager sharedManager];
+    
+    [objectManager getObjectsAtPath:api_endpoint_info parameters:@{@"api_key": api_key} success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult){
+        Info *info = [[mappingResult array] objectAtIndex:0];
+        self.posts = info.posts;
+    }
+    failure:^(RKObjectRequestOperation *operation, NSError *error) {
         NSLog(@"Loaded this error: %@", [error localizedDescription]);
     }];
-    [operation start];
+}
+
+- (void)getPosts{
+    self.loading = YES;
+    
+    
+    if(self.data.count == 0){
+        self.offset = post_offset_start;
+    }
+    else if(self.refresh){
+        self.offset = post_offset_start;
+    }
+    else{
+        self.offset = self.offset + posts_limit;
+    }
+    
+    
+    RKObjectManager *objectManager = [RKObjectManager sharedManager];    
+
+    [objectManager getObjectsAtPath:api_endpoint_posts parameters:@{@"api_key": api_key, @"limit":[NSString stringWithFormat:@"%d", posts_limit], @"offset":[NSString stringWithFormat:@"%d", self.offset]} success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult){
+        [self dataLoaded:[mappingResult array]];
+        
+        self.loading = NO;
+    }
+    failure:^(RKObjectRequestOperation *operation, NSError *error) {
+         NSLog(@"Loaded this error: %@", [error localizedDescription]);
+        
+        self.loading = NO;
+    }];
+}
+
+- (void)getRefreshPost{
+    self.refresh = YES;
+    self.offset = 0;
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self getPosts];
+    });
 }
 
 - (void)didReceiveMemoryWarning
@@ -131,14 +224,22 @@ static int image_padding_bottom = 55;
         [data addObject:post];
     }
     
-    //self.data = [data arrayByAddingObjectsFromArray:data];
-    self.data = data;
+    if(self.data.count == 0){
+        self.data = data;
+    }
+    else if(self.refresh){
+        self.data = data;
+    }
+    else{
+        self.data = [self.data arrayByAddingObjectsFromArray:data];
+    }
+    
+    if(self.refresh){
+        self.refresh = NO;
+        [self.refreshControl endRefreshing];
+    }
     
     [self.tableView reloadData];
-}
-
-- (void)refreshData{
-    [self.refreshControl endRefreshing];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -174,6 +275,10 @@ static int image_padding_bottom = 55;
         [activity startAnimating];
         
         [cell addSubview:activity];
+        
+        if(!self.loading){
+            [self getPosts];
+        }
         
         return cell;
     }
@@ -247,9 +352,7 @@ static int image_padding_bottom = 55;
     [dateIcon setImage:[UIImage imageNamed:@"date.png"]];
     [cell addSubview:dateIcon];
     
-    
-    NSLog(@"%d", post.likes);
-    
+        
     return cell;
 }
 

@@ -16,5 +16,9 @@
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
 
 @property (strong, nonatomic) NSArray *data;
+@property (assign, nonatomic) BOOL loading;
+@property (assign, nonatomic) BOOL refresh;
+@property (assign, nonatomic) int posts;
+@property (assign, nonatomic) int offset;
 
 @end
