@@ -79,8 +79,9 @@ static int post_offset_start = 0;
     
     
     AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:api_base]];
+
     RKObjectManager *manager = [[RKObjectManager alloc] initWithHTTPClient:client];
-    
+
     
     
     RKObjectMapping *postMapping = [RKObjectMapping mappingForClass:[Post class]];
@@ -306,7 +307,7 @@ static int post_offset_start = 0;
     
     // Like icon
     UIImageView *likesIcon = [[UIImageView alloc] initWithFrame:CGRectMake(5, 6, 13, 11)];
-    [likesIcon setImage:[UIImage imageNamed:@"like-darkgrey.png"]];
+    [likesIcon setImage:[UIImage imageNamed:@"like-darkgrey-small.png"]];
     [likes addSubview:likesIcon];
     
     // Like count format to String

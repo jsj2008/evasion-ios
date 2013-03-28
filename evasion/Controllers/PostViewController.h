@@ -10,9 +10,11 @@
 
 #import "Post.h"
 
-@interface PostViewController : FZViewController
+@interface PostViewController : FZViewController <UIScrollViewDelegate>
 
 @property (strong, nonatomic) Post *post;
+
+@property (strong, nonatomic) UIScrollView *scrollView;
 
 - (id)initWithPost:(Post *)post;
 
