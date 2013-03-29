@@ -8,9 +8,8 @@
 
 #import "AppDelegate.h"
 
-#import "IIViewDeckController.h"
-
 #import "MainViewController.h"
+#import "OAuthViewController.h"
 
 @implementation AppDelegate
 
@@ -29,8 +28,10 @@
     
     MainViewController *mainView = [[MainViewController alloc] init];
     self.mainNav = [[UINavigationController alloc] initWithRootViewController:mainView];
-    
     self.window.rootViewController = self.mainNav;
+    
+    //OAuthViewController *oauthView = [[OAuthViewController alloc] init];
+    //self.window.rootViewController = oauthView;
     
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
