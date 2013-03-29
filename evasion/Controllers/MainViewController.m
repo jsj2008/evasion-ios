@@ -11,6 +11,7 @@
 
 #import <QuartzCore/QuartzCore.h>
 #import <SDWebImage/UIButton+WebCache.h>
+#import <SDWebImage/SDImageCache.h>
 
 #import "FZDate.h"
 #import "FZImage.h"
@@ -126,6 +127,7 @@ static int post_offset_start = 0;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [self getPosts];
     });
+    
 }
 
 - (void)networkStatus{
@@ -150,6 +152,7 @@ static int post_offset_start = 0;
     [objectManager getObjectsAtPath:api_endpoint_info parameters:@{@"api_key": api_key} success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult){
         Info *info = [[mappingResult array] objectAtIndex:0];
         self.posts = info.posts;
+        NSLog(@"%d", self.posts);
     }
     failure:^(RKObjectRequestOperation *operation, NSError *error) {
         NSLog(@"Loaded this error: %@", [error localizedDescription]);
@@ -188,6 +191,10 @@ static int post_offset_start = 0;
 - (void)getRefreshPost{
     self.refresh = YES;
     self.offset = 0;
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+       [self getBlogInfo]; 
+    });
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [self getPosts];
@@ -270,18 +277,32 @@ static int post_offset_start = 0;
 
     
     if(indexPath.row == self.data.count){
-        UIActivityIndicatorView *activity = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(150, 14, 20, 20)];
-        [activity setBackgroundColor:[UIColor clearColor]];
-        [activity setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleGray];
-        [activity startAnimating];
         
-        [cell addSubview:activity];
-        
-        if(!self.loading){
-            [self getPosts];
+        if(self.data.count < self.posts){
+            
+            UIActivityIndicatorView *activity = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(150, 14, 20, 20)];
+            [activity setBackgroundColor:[UIColor clearColor]];
+            [activity setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleGray];
+            [activity startAnimating];
+            
+            [cell addSubview:activity];
+            
+            if(!self.loading){
+                [self getPosts];
+            }
+            
+            return cell;
         }
-        
-        return cell;
+        else{
+            UILabel *end = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, 48)];
+            [end setText:@"END"];
+            [end setFont:[UIFont fontWithName:@"Gibson-SemiBold" size:18]];
+            [end setTextColor:[UIColor colorWithRed:183.0/255.0 green:183.0/255.0 blue:183.0/255.0 alpha:1.0]];
+            [end setTextAlignment:NSTextAlignmentCenter];
+            
+            [cell addSubview:end];
+            return cell;
+        }
     }
     
     
