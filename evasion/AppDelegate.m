@@ -9,7 +9,7 @@
 #import "AppDelegate.h"
 
 #import "MainViewController.h"
-#import "OAuthViewController.h"
+#import "SigninViewController.h"
 
 @implementation AppDelegate
 
@@ -26,12 +26,12 @@
         self.mainScreeniPhone5 = NO;
     }
     
-    MainViewController *mainView = [[MainViewController alloc] init];
-    self.mainNav = [[UINavigationController alloc] initWithRootViewController:mainView];
-    self.window.rootViewController = self.mainNav;
+    //MainViewController *mainView = [[MainViewController alloc] init];
+    //self.mainNav = [[UINavigationController alloc] initWithRootViewController:mainView];
+    //self.window.rootViewController = self.mainNav;
     
-    //OAuthViewController *oauthView = [[OAuthViewController alloc] init];
-    //self.window.rootViewController = oauthView;
+    SigninViewController *signinController = [[SigninViewController alloc] init];
+    self.window.rootViewController = signinController;
     
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];

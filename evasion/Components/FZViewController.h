@@ -12,5 +12,6 @@
 
 - (UIBarButtonItem *)buttonSignin;
 - (UIBarButtonItem *)buttonBack;
+- (UIBarButtonItem *)buttonClose;
 
 @end

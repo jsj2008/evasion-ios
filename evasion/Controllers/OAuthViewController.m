@@ -2,17 +2,11 @@
 //  OAuthViewController.m
 //  evasion
 //
-//  Created by Aymeric on 28/03/13.
+//  Created by Aymeric on 01/04/13.
 //  Copyright (c) 2013 Fuzzze. All rights reserved.
 //
 
 #import "OAuthViewController.h"
-
-#import <RestKit/RestKit.h>
-#import "STLOAuthClient.h"
-
-static NSString *const api_key = @"GCBoybPwsGdolRRM8ZnnoV8R8BYdmo5STjVSwFHsfoLqCeSVdC";
-static NSString *const api_secret = @"DyIG65Imaz2sP1Sh4l6GfwhJzE2hJgIc3gm1bB6o2yl2hXhQVt";
 
 @interface OAuthViewController ()
 
@@ -20,11 +14,13 @@ static NSString *const api_secret = @"DyIG65Imaz2sP1Sh4l6GfwhJzE2hJgIc3gm1bB6o2y
 
 @implementation OAuthViewController
 
-- (id)init
-{
+- (id)init{
     self = [super init];
     if (self) {
         // Custom initialization
+        self.view.backgroundColor = [UIColor whiteColor];
+        self.title = @"Sign in with Tumblr";
+        self.navigationItem.leftBarButtonItem = [self buttonClose];
     }
     return self;
 }
@@ -33,25 +29,60 @@ static NSString *const api_secret = @"DyIG65Imaz2sP1Sh4l6GfwhJzE2hJgIc3gm1bB6o2y
 {
     [super viewDidLoad];
 	
-    STLOAuthClient *client = [[STLOAuthClient alloc] initWithBaseURL:[NSURL URLWithString:@"http://www.tumblr.com/"]];
-    [client setConsumerKey:api_key secret:api_secret];
-    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
-                            @"m@aymericgallissot.fr", @"x_auth_username",
-                            @"1234", @"x_auth_password",
-                            @"client_auth", @"x_auth_mode",
-                            nil];
+    self.webView = [[UIWebView alloc] initWithFrame:self.view.bounds];
+    self.webView.delegate = self;
+    NSString *authenticateURLString = @"http://oauth.summerevasion.com/signin";
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:authenticateURLString]];
+    [self.webView loadRequest:request];
+    self.webView.scalesPageToFit = YES;
     
-    [client getPath:@"oauth/access_token/" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"SUccess %@", operation.responseString);
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Failure, %@", error);
-    }];
+    [self.view addSubview:self.webView];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
+    
+    NSLog(@"data: %@",[[request URL] query]);
+    
+    NSArray *parameters = [[[request URL] query] componentsSeparatedByString:@"&"];
+    
+    if(parameters.count == 2){
+        NSArray *test_oauth_token = [[parameters objectAtIndex:0] componentsSeparatedByString:@"="];
+        
+        NSArray *test_oauth_verifier = [[parameters objectAtIndex:1] componentsSeparatedByString:@"="];
+        
+        if([[test_oauth_token objectAtIndex:0] isEqualToString:@"oauth_token"] && [[test_oauth_verifier objectAtIndex:0] isEqualToString:@"oauth_verifier"]){
+            NSLog(@"GOOD");
+            [self dismissViewControllerAnimated:YES completion:nil];
+            return NO;
+        }
+        else{
+            return YES;
+        }
+    }
+    
+    return YES;
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+    NSHTTPCookie *cookie;
+    NSHTTPCookieStorage *cookieJar = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+    for (cookie in [cookieJar cookies]) {
+        if([[cookie name] isEqualToString:@"request_token"]){
+           NSLog(@"%@: %@", [cookie name], [cookie value]);
+        }
+        if([[cookie name] isEqualToString:@"request_token_secret"]){
+            NSLog(@"%@: %@", [cookie name], [cookie value]);
+        }
+        
+    }
+    //NSString *URLString = [[self.webView.request URL] absoluteString];
+    //NSLog(@"--> %@", URLString);
 }
 
 @end

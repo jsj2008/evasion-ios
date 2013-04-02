@@ -156,6 +156,7 @@ static int post_offset_start = 0;
     }
     failure:^(RKObjectRequestOperation *operation, NSError *error) {
         NSLog(@"Loaded this error: %@", [error localizedDescription]);
+        
     }];
 }
 
@@ -185,6 +186,7 @@ static int post_offset_start = 0;
          NSLog(@"Loaded this error: %@", [error localizedDescription]);
         
         self.loading = NO;
+        [self.refreshControl endRefreshing];
     }];
 }
 
