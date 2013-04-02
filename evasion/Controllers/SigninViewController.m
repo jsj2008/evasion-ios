@@ -7,7 +7,7 @@
 //
 
 #import "SigninViewController.h"
-#import "OAuthViewController.h"
+#import "FZUser.h"
 
 
 @interface SigninViewController ()
@@ -45,9 +45,14 @@
 - (void)actionOAuth{
     
     OAuthViewController *oauthController = [[OAuthViewController alloc] init];
+    oauthController.delegate = self;
     UINavigationController *oauthNav = [[UINavigationController alloc] initWithRootViewController:oauthController];
     
     [self presentViewController:oauthNav animated:YES completion:nil];
+}
+
+- (void)OAuthCallback:(NSDictionary *)OAuthData{
+    [[FZUser sharedUser] getAccessTokenWithData:OAuthData];
 }
 
 @end

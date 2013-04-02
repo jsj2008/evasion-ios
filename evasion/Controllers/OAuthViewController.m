@@ -19,7 +19,7 @@
     if (self) {
         // Custom initialization
         self.view.backgroundColor = [UIColor whiteColor];
-        self.title = @"Sign in with Tumblr";
+        self.title = @"Connection";
         self.navigationItem.leftBarButtonItem = [self buttonClose];
     }
     return self;
@@ -28,7 +28,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	
+    
     self.webView = [[UIWebView alloc] initWithFrame:self.view.bounds];
     self.webView.delegate = self;
     NSString *authenticateURLString = @"http://oauth.summerevasion.com/signin";
@@ -47,7 +47,7 @@
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
     
-    NSLog(@"data: %@",[[request URL] query]);
+    //NSLog(@"data: %@",[[request URL] query]);
     
     NSArray *parameters = [[[request URL] query] componentsSeparatedByString:@"&"];
     
@@ -58,6 +58,21 @@
         
         if([[test_oauth_token objectAtIndex:0] isEqualToString:@"oauth_token"] && [[test_oauth_verifier objectAtIndex:0] isEqualToString:@"oauth_verifier"]){
             NSLog(@"GOOD");
+            
+            self.oauth_token = [test_oauth_token objectAtIndex:1];
+            self.oauth_verifier = [test_oauth_verifier objectAtIndex:1];
+            
+            NSDictionary *OAuthData = @{
+                @"oauth_token":self.oauth_token,
+                @"oauth_verifier":self.oauth_verifier,
+                @"request_token":self.request_token,
+                @"request_toke_secret":self.request_toke_secret
+            };
+            
+            if ([self.delegate respondsToSelector:@selector(OAuthCallback:)]) {
+                [self.delegate OAuthCallback:OAuthData];
+            }
+                                    
             [self dismissViewControllerAnimated:YES completion:nil];
             return NO;
         }
@@ -74,9 +89,11 @@
     NSHTTPCookieStorage *cookieJar = [NSHTTPCookieStorage sharedHTTPCookieStorage];
     for (cookie in [cookieJar cookies]) {
         if([[cookie name] isEqualToString:@"request_token"]){
-           NSLog(@"%@: %@", [cookie name], [cookie value]);
+            self.request_token = [cookie value];
+            NSLog(@"%@: %@", [cookie name], [cookie value]);
         }
         if([[cookie name] isEqualToString:@"request_token_secret"]){
+            self.request_toke_secret = [cookie value];
             NSLog(@"%@: %@", [cookie name], [cookie value]);
         }
         

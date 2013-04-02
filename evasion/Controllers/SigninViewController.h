@@ -7,7 +7,8 @@
 //
 
 #import "FZViewController.h"
+#import "OAuthViewController.h"
 
-@interface SigninViewController : FZViewController
+@interface SigninViewController : FZViewController <OAuthDelegate>
 
 @end
