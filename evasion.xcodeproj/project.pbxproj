@@ -12,6 +12,7 @@
 		B0005B681709FF3D008BE290 /* OAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0005B671709FF3C008BE290 /* OAuthViewController.m */; };
 		B0005B6B170A2525008BE290 /* nav-close.png in Resources */ = {isa = PBXBuildFile; fileRef = B0005B69170A2525008BE290 /* nav-close.png */; };
 		B0005B6C170A2525008BE290 /* nav-close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B0005B6A170A2525008BE290 /* nav-close@2x.png */; };
+		B0092E7C170AF1650049834A /* FZUser.m in Sources */ = {isa = PBXBuildFile; fileRef = B0092E7B170AF1650049834A /* FZUser.m */; };
 		B0214E45170207C000C50CB2 /* facebook@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B0214E41170207C000C50CB2 /* facebook@2x.png */; };
 		B0214E46170207C000C50CB2 /* like-darkgrey@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B0214E42170207C000C50CB2 /* like-darkgrey@2x.png */; };
 		B0214E47170207C000C50CB2 /* like-white@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B0214E43170207C000C50CB2 /* like-white@2x.png */; };
@@ -103,6 +104,8 @@
 		B0005B671709FF3C008BE290 /* OAuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OAuthViewController.m; path = Controllers/OAuthViewController.m; sourceTree = "<group>"; };
 		B0005B69170A2525008BE290 /* nav-close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "nav-close.png"; path = "Resources/Assets/nav-close.png"; sourceTree = "<group>"; };
 		B0005B6A170A2525008BE290 /* nav-close@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "nav-close@2x.png"; path = "Resources/Assets/nav-close@2x.png"; sourceTree = "<group>"; };
+		B0092E7A170AF1650049834A /* FZUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FZUser.h; path = Components/FZUser.h; sourceTree = "<group>"; };
+		B0092E7B170AF1650049834A /* FZUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FZUser.m; path = Components/FZUser.m; sourceTree = "<group>"; };
 		B0214E41170207C000C50CB2 /* facebook@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "facebook@2x.png"; path = "Resources/Assets/facebook@2x.png"; sourceTree = "<group>"; };
 		B0214E42170207C000C50CB2 /* like-darkgrey@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "like-darkgrey@2x.png"; path = "Resources/Assets/like-darkgrey@2x.png"; sourceTree = "<group>"; };
 		B0214E43170207C000C50CB2 /* like-white@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "like-white@2x.png"; path = "Resources/Assets/like-white@2x.png"; sourceTree = "<group>"; };
@@ -209,6 +212,8 @@
 				B084FB1816FE63A40027BD8B /* FZImage.m */,
 				B084FB2116FE7B3D0027BD8B /* FZDate.h */,
 				B084FB2216FE7B3D0027BD8B /* FZDate.m */,
+				B0092E7A170AF1650049834A /* FZUser.h */,
+				B0092E7B170AF1650049834A /* FZUser.m */,
 			);
 			name = Components;
 			sourceTree = "<group>";
@@ -302,7 +307,6 @@
 		B0F4C5FA16FD2283002433F8 = {
 			isa = PBXGroup;
 			children = (
-				B0214E4917021F9400C50CB2 /* Social.framework */,
 				B0F4C60C16FD2283002433F8 /* evasion */,
 				B0F4C60516FD2283002433F8 /* Frameworks */,
 				B0F4C60416FD2283002433F8 /* Products */,
@@ -320,6 +324,7 @@
 		B0F4C60516FD2283002433F8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B0214E4917021F9400C50CB2 /* Social.framework */,
 				B084FAFF16FDEE300027BD8B /* QuartzCore.framework */,
 				B084FAF016FDEB1D0027BD8B /* ImageIO.framework */,
 				B084FAEC16FDE9620027BD8B /* SystemConfiguration.framework */,
@@ -496,6 +501,7 @@
 				B0005B5316FF5D64008BE290 /* Info.m in Sources */,
 				B0005B651709F33F008BE290 /* SigninViewController.m in Sources */,
 				B0005B681709FF3D008BE290 /* OAuthViewController.m in Sources */,
+				B0092E7C170AF1650049834A /* FZUser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
