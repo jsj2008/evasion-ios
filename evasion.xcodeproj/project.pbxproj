@@ -18,6 +18,8 @@
 		B0092E87170C6CB30049834A /* Default@2x 2.png in Resources */ = {isa = PBXBuildFile; fileRef = B0092E84170C6CB30049834A /* Default@2x 2.png */; };
 		B0092E8A170C756C0049834A /* signin-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = B0092E88170C756C0049834A /* signin-logo.png */; };
 		B0092E8B170C756C0049834A /* signin-logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B0092E89170C756C0049834A /* signin-logo@2x.png */; };
+		B0092EEE170DE3500049834A /* FZLike.m in Sources */ = {isa = PBXBuildFile; fileRef = B0092EED170DE34F0049834A /* FZLike.m */; };
+		B0092EF6170DEAFA0049834A /* Likes.plist in Resources */ = {isa = PBXBuildFile; fileRef = B0092EF5170DEAFA0049834A /* Likes.plist */; };
 		B0214E45170207C000C50CB2 /* facebook@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B0214E41170207C000C50CB2 /* facebook@2x.png */; };
 		B0214E46170207C000C50CB2 /* like-darkgrey@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B0214E42170207C000C50CB2 /* like-darkgrey@2x.png */; };
 		B0214E47170207C000C50CB2 /* like-white@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B0214E43170207C000C50CB2 /* like-white@2x.png */; };
@@ -113,6 +115,9 @@
 		B0092E84170C6CB30049834A /* Default@2x 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x 2.png"; path = "Resources/Default/Default@2x 2.png"; sourceTree = "<group>"; };
 		B0092E88170C756C0049834A /* signin-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "signin-logo.png"; path = "Resources/Assets/signin-logo.png"; sourceTree = "<group>"; };
 		B0092E89170C756C0049834A /* signin-logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "signin-logo@2x.png"; path = "Resources/Assets/signin-logo@2x.png"; sourceTree = "<group>"; };
+		B0092EEC170DE34F0049834A /* FZLike.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FZLike.h; path = Components/FZLike.h; sourceTree = "<group>"; };
+		B0092EED170DE34F0049834A /* FZLike.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FZLike.m; path = Components/FZLike.m; sourceTree = "<group>"; };
+		B0092EF5170DEAFA0049834A /* Likes.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Likes.plist; path = Datas/Likes.plist; sourceTree = "<group>"; };
 		B0214E41170207C000C50CB2 /* facebook@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "facebook@2x.png"; path = "Resources/Assets/facebook@2x.png"; sourceTree = "<group>"; };
 		B0214E42170207C000C50CB2 /* like-darkgrey@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "like-darkgrey@2x.png"; path = "Resources/Assets/like-darkgrey@2x.png"; sourceTree = "<group>"; };
 		B0214E43170207C000C50CB2 /* like-white@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "like-white@2x.png"; path = "Resources/Assets/like-white@2x.png"; sourceTree = "<group>"; };
@@ -209,6 +214,14 @@
 			name = Icon;
 			sourceTree = "<group>";
 		};
+		B0092EF2170DEAD40049834A /* Datas */ = {
+			isa = PBXGroup;
+			children = (
+				B0092EF5170DEAFA0049834A /* Likes.plist */,
+			);
+			name = Datas;
+			sourceTree = "<group>";
+		};
 		B084FAC416FDE43D0027BD8B /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -235,6 +248,8 @@
 				B084FB2216FE7B3D0027BD8B /* FZDate.m */,
 				B0092E7A170AF1650049834A /* FZUser.h */,
 				B0092E7B170AF1650049834A /* FZUser.m */,
+				B0092EEC170DE34F0049834A /* FZLike.h */,
+				B0092EED170DE34F0049834A /* FZLike.m */,
 			);
 			name = Components;
 			sourceTree = "<group>";
@@ -367,6 +382,7 @@
 		B0F4C60C16FD2283002433F8 /* evasion */ = {
 			isa = PBXGroup;
 			children = (
+				B0092EF2170DEAD40049834A /* Datas */,
 				B084FAC416FDE43D0027BD8B /* Controllers */,
 				B084FAC816FDE4720027BD8B /* Models */,
 				B084FAC516FDE45E0027BD8B /* Components */,
@@ -500,6 +516,7 @@
 				B0092E87170C6CB30049834A /* Default@2x 2.png in Resources */,
 				B0092E8A170C756C0049834A /* signin-logo.png in Resources */,
 				B0092E8B170C756C0049834A /* signin-logo@2x.png in Resources */,
+				B0092EF6170DEAFA0049834A /* Likes.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -526,6 +543,7 @@
 				B0005B651709F33F008BE290 /* SigninViewController.m in Sources */,
 				B0005B681709FF3D008BE290 /* OAuthViewController.m in Sources */,
 				B0092E7C170AF1650049834A /* FZUser.m in Sources */,
+				B0092EEE170DE3500049834A /* FZLike.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
