@@ -11,4 +11,9 @@
 
 @interface SigninViewController : FZViewController <OAuthDelegate>
 
+@property (strong, nonatomic) UIButton *buttonSignin;
+@property (strong, nonatomic) UIButton *buttonSignout;
+@property (strong, nonatomic) UIButton *buttonExplore;
+@property (strong, nonatomic) UIButton *buttonNoSign;
+
 @end

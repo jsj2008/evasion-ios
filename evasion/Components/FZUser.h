@@ -12,6 +12,11 @@
 
 + (FZUser *)sharedUser;
 
+@property (strong, nonatomic) NSString *access_token;
+@property (strong, nonatomic) NSString *access_token_secret;
+@property (assign, nonatomic) BOOL connected;
+
 - (void)getAccessTokenWithData:(NSDictionary*)oauthData;
+- (void)signOut;
 
 @end

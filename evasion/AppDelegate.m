@@ -31,7 +31,8 @@
     //self.window.rootViewController = self.mainNav;
     
     SigninViewController *signinController = [[SigninViewController alloc] init];
-    self.window.rootViewController = signinController;
+    UINavigationController *mainView = [[UINavigationController alloc] initWithRootViewController:signinController];
+    self.window.rootViewController = mainView;
     
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];

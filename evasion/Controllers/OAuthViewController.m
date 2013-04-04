@@ -72,8 +72,12 @@
             if ([self.delegate respondsToSelector:@selector(OAuthCallback:)]) {
                 [self.delegate OAuthCallback:OAuthData];
             }
-                                    
-            [self dismissViewControllerAnimated:YES completion:nil];
+            
+            [self performSelectorOnMainThread:@selector(deleteCookie) withObject:nil waitUntilDone:NO];
+            
+            [self dismissViewControllerAnimated:YES completion:^{
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"SignInOK" object:nil];
+            }];
             return NO;
         }
         else{
@@ -101,5 +105,16 @@
     //NSString *URLString = [[self.webView.request URL] absoluteString];
     //NSLog(@"--> %@", URLString);
 }
+
+- (void)deleteCookie{
+    NSHTTPCookie *cookie;
+    NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+    for (cookie in [storage cookies]){
+        [storage deleteCookie:cookie];
+    }
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+
 
 @end
