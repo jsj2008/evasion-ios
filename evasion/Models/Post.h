@@ -12,7 +12,7 @@
 
 @interface Post : NSObject
 
-@property (assign, nonatomic) int post_id;
+@property (strong, nonatomic) NSString *post_id;
 @property (assign, nonatomic) int timestamp;
 @property (strong, nonatomic) NSString *shortURL;
 @property (strong, nonatomic) NSArray *images;
