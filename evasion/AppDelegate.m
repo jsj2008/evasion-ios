@@ -18,6 +18,16 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     
+    // Set Like style
+    self.likeBackgroundColor = [UIColor colorWithRed:238.0/255.0 green:238.0/255.0 blue:238.0/255.0 alpha:1.0];
+    self.likeActiveBackgroundColor = [UIColor colorWithRed:61.0/255.0 green:61.0/255.0 blue:61.0/255.0 alpha:1.0];
+    self.likeColor = [UIColor colorWithRed:112.0/255.0 green:111.0/255.0 blue:111.0/255.0 alpha:1.0];
+    self.likeActiveColor = [UIColor whiteColor];
+    self.likeIcon = [UIImage imageNamed:@"like-darkgrey.png"];
+    self.likeActiveIcon = [UIImage imageNamed:@"like-white.png"];
+    self.likeIconSmall = [UIImage imageNamed:@"like-darkgrey-small.png"];
+    self.likeActiveIconSmall = [UIImage imageNamed:@"like-white-small.png"];
+    
     // Screen iPhone 5
     if([[UIScreen mainScreen]bounds].size.height == 568){
         self.mainScreeniPhone5 = YES;

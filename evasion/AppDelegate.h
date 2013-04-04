@@ -17,4 +17,13 @@
 
 @property (assign, nonatomic) int mainScreeniPhone5;
 
+@property (strong, nonatomic) UIColor *likeBackgroundColor;
+@property (strong, nonatomic) UIColor *likeActiveBackgroundColor;
+@property (strong, nonatomic) UIColor *likeColor;
+@property (strong, nonatomic) UIColor *likeActiveColor;
+@property (strong, nonatomic) UIImage *likeIcon;
+@property (strong, nonatomic) UIImage *likeActiveIcon;
+@property (strong, nonatomic) UIImage *likeIconSmall;
+@property (strong, nonatomic) UIImage *likeActiveIconSmall;
+
 @end
