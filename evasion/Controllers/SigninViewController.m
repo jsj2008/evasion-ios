@@ -121,8 +121,8 @@
 }
 
 - (void)actionExplore{
-    MainViewController *mainController = [[MainViewController alloc] init];
-    [self.navigationController pushViewController:mainController animated:YES];
+    //MainViewController *mainController = [[MainViewController alloc] init];
+    [self.navigationController pushViewController:sharedAppDelegate.mainController animated:YES];
 }
 
 - (void)OAuthCallback:(NSDictionary *)OAuthData{

@@ -30,6 +30,8 @@
     //self.mainNav = [[UINavigationController alloc] initWithRootViewController:mainView];
     //self.window.rootViewController = self.mainNav;
     
+    self.mainController = [[MainViewController alloc] init];
+    
     SigninViewController *signinController = [[SigninViewController alloc] init];
     UINavigationController *mainView = [[UINavigationController alloc] initWithRootViewController:signinController];
     self.window.rootViewController = mainView;
