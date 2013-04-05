@@ -45,7 +45,7 @@
 
 + (NSString*)timeToSecond:(int)time{
     
-    NSString *string = [[NSString alloc] init];
+    NSString *string = nil;
     
     if(time == 1 || time == 0){
         string = [NSString stringWithFormat:@"1 second"];
@@ -60,7 +60,7 @@
 
 + (NSString*)timeToMinute:(int)time{
     
-    NSString *string = [[NSString alloc] init];
+    NSString *string = nil;
     
     time = (int)(floor(time/60));
     
@@ -77,7 +77,7 @@
 
 + (NSString*)timeToHour:(int)time{
     
-    NSString *string = [[NSString alloc] init];
+    NSString *string = nil;
     
     time = (int)(floor(time/(60*60)));
     
@@ -94,7 +94,7 @@
 
 + (NSString*)timeToDay:(int)time{
     
-    NSString *string = [[NSString alloc] init];
+    NSString *string = nil;
     
     time = (int)(floor(time/(60*60*24)));
     
@@ -111,7 +111,7 @@
 
 + (NSString*)timeToWeek:(int)time{
     
-    NSString *string = [[NSString alloc] init];
+    NSString *string = nil;
     
     time = (int)(floor(time/(60*60*24*7)));
     
@@ -128,7 +128,7 @@
 
 + (NSString*)timeToMonth:(int)time{
     
-    NSString *string = [[NSString alloc] init];
+    NSString *string = nil;
     
     time = (int)(floor(time/(60*60*24*7*4)));
     
@@ -145,7 +145,7 @@
 
 + (NSString*)timeToYear:(int)time{
     
-    NSString *string = [[NSString alloc] init];
+    NSString *string = nil;
     
     time = (int)(floor(time/(60*60*24*365)));
     
