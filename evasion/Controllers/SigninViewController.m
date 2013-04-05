@@ -32,7 +32,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    
+    int paddingTop = -24;
+    if(sharedAppDelegate.mainScreeniPhone5){
+        paddingTop += 88;
+    }
     
     // Logo
     UIImageView *logo = [[UIImageView alloc] initWithFrame:CGRectMake((320/2)-100, 87, 200, 26)];
@@ -41,45 +45,55 @@
     
     
     // Button Sign In
-    self.buttonSignin = [[UIButton alloc] initWithFrame:CGRectMake(60, 300, 200, 40)];
+    self.buttonSignin = [[UIButton alloc] initWithFrame:CGRectMake(60, 300+paddingTop, 200, 40)];
     [self.buttonSignin  setBackgroundImage:[FZImage imageWithColor:[UIColor colorWithRed:52.0/255.0 green:82.0/255.0 blue:111.0/255.0 alpha:1.0]] forState:UIControlStateNormal];
     [self.buttonSignin  setBackgroundImage:[FZImage imageWithColor:[UIColor colorWithRed:41.0/255.0 green:64.0/255.0 blue:87.0/255.0 alpha:1.0]] forState:UIControlStateHighlighted];
-    [self.buttonSignin .layer setCornerRadius:2.0];
+    [self.buttonSignin.layer setCornerRadius:2.0];
     [self.buttonSignin  setClipsToBounds:YES];
     [self.buttonSignin  setTitle:@"Sign in with Tumblr" forState:UIControlStateNormal];
     [self.buttonSignin  setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self.buttonSignin .titleLabel setFont:[UIFont fontWithName:@"Gibson-SemiBold" size:15]];
+    [self.buttonSignin.titleLabel setFont:[UIFont fontWithName:@"Gibson-SemiBold" size:15]];
     [self.buttonSignin  addTarget:self action:@selector(actionOAuth) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.buttonSignin];
     
     
     // Button Sign out
-    self.buttonSignout = [[UIButton alloc] initWithFrame:CGRectMake(60, 300, 90, 40)];
+    self.buttonSignout = [[UIButton alloc] initWithFrame:CGRectMake(60, 300+paddingTop, 90, 40)];
     [self.buttonSignout  setBackgroundImage:[FZImage imageWithColor:[UIColor colorWithRed:179.0/255.0 green:54.0/255.0 blue:54.0/255.0 alpha:1.0]] forState:UIControlStateNormal];
     [self.buttonSignout  setBackgroundImage:[FZImage imageWithColor:[UIColor colorWithRed:154.0/255.0 green:46.0/255.0 blue:46.0/255.0 alpha:1.0]] forState:UIControlStateHighlighted];
-    [self.buttonSignout .layer setCornerRadius:2.0];
+    [self.buttonSignout.layer setCornerRadius:2.0];
     [self.buttonSignout  setClipsToBounds:YES];
     [self.buttonSignout  setTitle:@"Sign out" forState:UIControlStateNormal];
     [self.buttonSignout  setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self.buttonSignout .titleLabel setFont:[UIFont fontWithName:@"Gibson-SemiBold" size:15]];
+    [self.buttonSignout.titleLabel setFont:[UIFont fontWithName:@"Gibson-SemiBold" size:15]];
     [self.buttonSignout  addTarget:self action:@selector(actionSignOut) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.buttonSignout];
     
     // Button Explore
-    self.buttonExplore = [[UIButton alloc] initWithFrame:CGRectMake(60+90+20, 300, 90, 40)];
+    self.buttonExplore = [[UIButton alloc] initWithFrame:CGRectMake(60+90+20, 300+paddingTop, 90, 40)];
     [self.buttonExplore  setBackgroundImage:[FZImage imageWithColor:[UIColor colorWithRed:52.0/255.0 green:82.0/255.0 blue:111.0/255.0 alpha:1.0]] forState:UIControlStateNormal];
     [self.buttonExplore  setBackgroundImage:[FZImage imageWithColor:[UIColor colorWithRed:41.0/255.0 green:64.0/255.0 blue:87.0/255.0 alpha:1.0]] forState:UIControlStateHighlighted];
-    [self.buttonExplore .layer setCornerRadius:2.0];
+    [self.buttonExplore.layer setCornerRadius:2.0];
     [self.buttonExplore  setClipsToBounds:YES];
     [self.buttonExplore  setTitle:@"Explore" forState:UIControlStateNormal];
     [self.buttonExplore  setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self.buttonExplore .titleLabel setFont:[UIFont fontWithName:@"Gibson-SemiBold" size:15]];
+    [self.buttonExplore.titleLabel setFont:[UIFont fontWithName:@"Gibson-SemiBold" size:15]];
     [self.buttonExplore  addTarget:self action:@selector(actionExplore) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.buttonExplore];
     
     
+    // Do not connect
+    self.buttonNoSign = [[UIButton alloc] initWithFrame:CGRectMake(100, 358+paddingTop, 120, 26)];
+    [self.buttonNoSign  setTitle:@"Do not connect" forState:UIControlStateNormal];
+    [self.buttonNoSign  setTitleColor:[UIColor colorWithRed:183.0/255.0 green:183.0/255.0 blue:183.0/255.0 alpha:1.0] forState:UIControlStateNormal];
+    [self.buttonNoSign  setTitleColor:[UIColor colorWithRed:106.0/255.0 green:106.0/255.0 blue:106.0/255.0 alpha:1.0] forState:UIControlStateHighlighted];
+    [self.buttonNoSign.titleLabel setFont:[UIFont fontWithName:@"Gibson-Italic" size:15]];
+    [self.buttonNoSign  addTarget:self action:@selector(actionExplore) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.buttonNoSign];
+    
     if([FZUser sharedUser].connected){
         [self.buttonSignin setHidden:YES];
+        [self.buttonNoSign setHidden:YES];
     }
     else{
         [self.buttonSignout setHidden:YES];
@@ -112,6 +126,7 @@
     }
     completion:^(BOOL finished){
         self.buttonSignin.hidden = NO;
+        self.buttonNoSign.hidden = NO;
     
         self.buttonSignout.hidden = YES;
         self.buttonSignout.alpha = 1.0;
@@ -121,7 +136,6 @@
 }
 
 - (void)actionExplore{
-    //MainViewController *mainController = [[MainViewController alloc] init];
     [self.navigationController pushViewController:sharedAppDelegate.mainController animated:YES];
 }
 
@@ -131,6 +145,7 @@
     self.buttonSignin.hidden = YES;
     self.buttonSignout.hidden = NO;
     self.buttonExplore.hidden = NO;
+    self.buttonNoSign.hidden = YES;
 }
 
 @end
