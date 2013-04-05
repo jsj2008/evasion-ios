@@ -15,6 +15,8 @@
 
 #import "FZDate.h"
 #import "FZImage.h"
+#import "FZUser.h"
+#import "FZLike.h"
 
 #import "Info.h"
 #import "Post.h"
@@ -128,6 +130,10 @@ static int post_offset_start = 0;
         [self getPosts];
     });
     
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+    [[FZUser sharedUser] appStarted];
 }
 
 - (void)networkStatus{

@@ -11,6 +11,8 @@
 #import "MainViewController.h"
 #import "SigninViewController.h"
 
+#import "FZUser.h"
+
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -36,15 +38,17 @@
         self.mainScreeniPhone5 = NO;
     }
     
-    //MainViewController *mainView = [[MainViewController alloc] init];
-    //self.mainNav = [[UINavigationController alloc] initWithRootViewController:mainView];
-    //self.window.rootViewController = self.mainNav;
+
     
     self.mainController = [[MainViewController alloc] init];
-    
     SigninViewController *signinController = [[SigninViewController alloc] init];
-    UINavigationController *mainView = [[UINavigationController alloc] initWithRootViewController:signinController];
-    self.window.rootViewController = mainView;
+    UINavigationController *mainNav = [[UINavigationController alloc] initWithRootViewController:signinController];
+    
+    // IF App already started
+    if([[FZUser sharedUser] appAlreadyStarted])
+        [mainNav pushViewController:self.mainController animated:NO];
+    
+    self.window.rootViewController = mainNav;
     
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];

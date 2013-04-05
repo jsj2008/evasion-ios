@@ -19,4 +19,7 @@
 - (void)getAccessTokenWithData:(NSDictionary*)oauthData;
 - (void)signOut;
 
+- (BOOL)appAlreadyStarted;
+- (void)appStarted;
+
 @end

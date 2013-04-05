@@ -10,6 +10,9 @@
 
 #define DATA_OAUTH_TOKEN @"FZTumblrOAuthToken"
 #define DATA_OAUTH_TOKEN_SECRET @"FZTumblrOAuthTokenSecret"
+#define DATA_APP_START @"FZAppStart"
+
+static const BOOL debug = NO;
 
 @implementation FZUser
 
@@ -94,5 +97,26 @@ static FZUser *sharedUser = nil;
     self.access_token_secret = nil;
     self.connected = NO;
 }
+
+- (BOOL)appAlreadyStarted{
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if([defaults objectForKey:DATA_APP_START] && debug == NO){
+        return YES;
+    }
+    else{
+        return NO;
+    }
+}
+
+- (void)appStarted{
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if(![defaults objectForKey:DATA_APP_START]){
+        [defaults setValue:@"YES" forKey:DATA_APP_START];
+        [defaults synchronize];
+    }
+}
+
 
 @end
