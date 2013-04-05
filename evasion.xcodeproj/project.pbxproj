@@ -652,6 +652,8 @@
 		B0F4C62116FD2283002433F8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Aymeric Gallissot (9X8BEK45V4)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Aymeric Gallissot (9X8BEK45V4)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/evasion/Librarie\"",
@@ -662,6 +664,8 @@
 				INFOPLIST_FILE = "evasion/evasion-Info.plist";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "37CB5BE7-88E5-4C2C-94B5-512EE64C7A08";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "37CB5BE7-88E5-4C2C-94B5-512EE64C7A08";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -669,6 +673,8 @@
 		B0F4C62216FD2283002433F8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Aymeric Gallissot";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Aymeric Gallissot";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/evasion/Librarie\"",
@@ -679,6 +685,8 @@
 				INFOPLIST_FILE = "evasion/evasion-Info.plist";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "96D16CB6-4905-468A-A422-49F5D3BA9610";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "96D16CB6-4905-468A-A422-49F5D3BA9610";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
