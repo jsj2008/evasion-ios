@@ -14,6 +14,7 @@
 
 @property (strong, nonatomic) NSString *post_id;
 @property (assign, nonatomic) int timestamp;
+@property (strong, nonatomic) NSString *reblog_key;
 @property (strong, nonatomic) NSString *shortURL;
 @property (strong, nonatomic) NSArray *images;
 @property (assign, nonatomic) int likes;

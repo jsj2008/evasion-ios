@@ -14,9 +14,15 @@
 
 #import "FZDate.h"
 #import "FZImage.h"
+#import "FZUser.h"
+#import "FZLike.h"
 
 static int image_padding_top = 10;
 static int image_padding_bottom = 10 + 40 + 10;
+
+static NSString *api_base = @"http://oauth.summerevasion.com";
+static NSString *api_endpoint_like = @"/like";
+static NSString *api_endpoint_unlike = @"/unlike";
 
 @interface PostViewController ()
 
@@ -67,29 +73,37 @@ static int image_padding_bottom = 10 + 40 + 10;
     }
     
     // Button Likes
-    UIButton *buttonLike = [[UIButton alloc] initWithFrame:CGRectMake(10, buttonY, 80, 40)];
-    [buttonLike setBackgroundColor:[UIColor colorWithRed:238.0/255.0 green:238.0/255.0 blue:238.0/255.0 alpha:1.0]];
-    [buttonLike addTarget:self action:@selector(actionLike) forControlEvents:UIControlEventTouchUpInside];
+    self.like = [[UIButton alloc] initWithFrame:CGRectMake(10, buttonY, 80, 40)];
+    [self.like addTarget:self action:@selector(actionLike) forControlEvents:UIControlEventTouchUpInside];
     
     // Button Likes icon
-    UIImageView *likeIcon = [[UIImageView alloc] initWithFrame:CGRectMake(7, 11, 21, 19)];
-    [likeIcon setImage:[UIImage imageNamed:@"like-darkgrey.png"]];
-    [buttonLike addSubview:likeIcon];
+    self.likeIcon = [[UIImageView alloc] initWithFrame:CGRectMake(7, 11, 21, 19)];
+    [self.like addSubview:self.likeIcon];
     
     // Button Likes text
-    UILabel *likeText = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 40)];
-    [likeText setText:likesCountString];
-    [likeText setFont:[UIFont fontWithName:@"Helvetica-Bold" size:15]];
-    [likeText setTextColor:[UIColor colorWithRed:112.0/255.0 green:111.0/255.0 blue:111.0/255.0 alpha:1.0]];
-    [likeText setTextAlignment:NSTextAlignmentCenter];
-    [likeText setBackgroundColor:[UIColor clearColor]];
-    [likeText sizeToFit];
-    float likeTextWidth = likeText.frame.size.width;
-    float likeTextHeight = likeText.frame.size.height;
+    self.likeText = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 40)];
+    [self.likeText setText:likesCountString];
+    [self.likeText setFont:[UIFont fontWithName:@"Helvetica-Bold" size:15]];
+    [self.likeText setTextAlignment:NSTextAlignmentCenter];
+    [self.likeText setBackgroundColor:[UIColor clearColor]];
+    [self.likeText sizeToFit];
+    float likeTextWidth = self.likeText.frame.size.width;
+    float likeTextHeight = self.likeText.frame.size.height;
     float likeTextX = 35+(20 - (likeTextWidth/2));
     float likeTextY = 20-(likeTextHeight/2);
-    [likeText setFrame:CGRectMake(likeTextX, likeTextY, likeTextWidth, likeTextHeight)];
-    [buttonLike addSubview:likeText];
+    [self.likeText setFrame:CGRectMake(likeTextX, likeTextY, likeTextWidth, likeTextHeight)];
+    [self.like addSubview:self.likeText];
+    
+    if([FZLike getLike:self.post.post_id]){
+        [self.like setBackgroundColor:sharedAppDelegate.likeActiveBackgroundColor];
+        [self.likeText setTextColor:sharedAppDelegate.likeActiveColor];
+        [self.likeIcon setImage:sharedAppDelegate.likeActiveIcon];
+    }
+    else{
+        [self.like setBackgroundColor:sharedAppDelegate.likeBackgroundColor];
+        [self.likeText setTextColor:sharedAppDelegate.likeColor];
+        [self.likeIcon setImage:sharedAppDelegate.likeIcon];
+    }
     
     
     // Button Tweet
@@ -143,10 +157,11 @@ static int image_padding_bottom = 10 + 40 + 10;
     [textShare setFrame:CGRectMake(textShareX, textShareY, textShareWidth, textShareHeight)];
     [buttonShare addSubview:textShare];
     
-    [self.scrollView addSubview:buttonLike];
+    [self.scrollView addSubview:self.like];
     [self.scrollView addSubview:buttonShare];
     [self.scrollView addSubview:buttonTweet];
     [self.scrollView addSubview:image];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -157,8 +172,90 @@ static int image_padding_bottom = 10 + 40 + 10;
 
 
 - (void)actionLike{
-    NSLog(@"Like");
+    
+    if([FZUser sharedUser].connected){
+        
+        if(![FZLike getLike:self.post.post_id]){
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                [self tumblrLike];
+            });
+        }
+        else{
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                [self tumblrUnlike];
+            });
+        }
+    }
+    else{
+        [[[UIAlertView alloc] initWithTitle:@"No Tumblr Account" message:@"There are no Tumblr account configured." delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil] show];
+    }
 }
+
+- (void)tumblrLike{
+    
+    
+    AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:api_base]];
+    RKObjectManager *manager = [[RKObjectManager alloc] initWithHTTPClient:client];
+    
+    
+    RKObjectMapping *infoMapping = [RKObjectMapping requestMapping];
+    [infoMapping addAttributeMappingsFromArray:@[@"response"]];
+    
+    
+    RKResponseDescriptor *infoResponseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:infoMapping pathPattern:api_endpoint_like keyPath:@"" statusCodes:nil];
+    [manager addResponseDescriptor:infoResponseDescriptor];
+    
+    
+    NSDictionary *params = @{@"oauth_token": [FZUser sharedUser].access_token, @"oauth_token_secret":[FZUser sharedUser].access_token_secret, @"post_id":self.post.post_id, @"post_reblog_key":self.post.reblog_key};
+
+    [manager getObjectsAtPath:api_endpoint_like parameters:params success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult){
+        [self tumblrLikeValid];
+    }
+    failure:^(RKObjectRequestOperation *operation, NSError *error) {
+        NSLog(@"Loaded this error: %@", [error localizedDescription]);
+    }];
+}
+
+- (void)tumblrLikeValid{
+    [FZLike saveLike:self.post.post_id];
+    
+    [self.like setBackgroundColor:sharedAppDelegate.likeActiveBackgroundColor];
+    [self.likeText setTextColor:sharedAppDelegate.likeActiveColor];
+    [self.likeIcon setImage:sharedAppDelegate.likeActiveIcon];
+}
+
+- (void)tumblrUnlikeValid{
+    [FZLike removeLike:self.post.post_id];
+    
+    [self.like setBackgroundColor:sharedAppDelegate.likeBackgroundColor];
+    [self.likeText setTextColor:sharedAppDelegate.likeColor];
+    [self.likeIcon setImage:sharedAppDelegate.likeIcon];
+}
+
+- (void)tumblrUnlike{
+    
+    AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:api_base]];
+    RKObjectManager *manager = [[RKObjectManager alloc] initWithHTTPClient:client];
+    
+    
+    RKObjectMapping *infoMapping = [RKObjectMapping requestMapping];
+    [infoMapping addAttributeMappingsFromArray:@[@"response"]];
+    
+    RKResponseDescriptor *infoResponseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:infoMapping pathPattern:api_endpoint_unlike keyPath:@"" statusCodes:nil];
+    [manager addResponseDescriptor:infoResponseDescriptor];
+    
+    
+    NSDictionary *params = @{@"oauth_token": [FZUser sharedUser].access_token, @"oauth_token_secret":[FZUser sharedUser].access_token_secret, @"post_id":self.post.post_id, @"post_reblog_key":self.post.reblog_key};
+    
+    [manager getObjectsAtPath:api_endpoint_unlike parameters:params success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult){
+        [self tumblrUnlikeValid];
+    }
+    failure:^(RKObjectRequestOperation *operation, NSError *error) {
+        NSLog(@"Loaded this error: %@", [error localizedDescription]);
+    }];
+}
+
+
 
 - (void)actionTweet{
     if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter])

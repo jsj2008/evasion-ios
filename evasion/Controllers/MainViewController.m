@@ -84,13 +84,13 @@ static int post_offset_start = 0;
     AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:api_base]];
 
     RKObjectManager *manager = [[RKObjectManager alloc] initWithHTTPClient:client];
-
     
     
     RKObjectMapping *postMapping = [RKObjectMapping mappingForClass:[Post class]];
     [postMapping addAttributeMappingsFromDictionary:@{
         @"id":@"post_id",
         @"timestamp":@"timestamp",
+        @"reblog_key":@"reblog_key",
         @"short_url":@"shortURL",
         @"note_count":@"likes",
         @"photos.alt_sizes":@"images"
@@ -110,13 +110,14 @@ static int post_offset_start = 0;
     // [postMapping addPropertyMapping:relationShipMapping];
     
     RKResponseDescriptor *responseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:postMapping pathPattern:api_endpoint_posts keyPath:@"response.posts" statusCodes:[NSIndexSet indexSetWithIndex:200]];
+    [manager addResponseDescriptor:responseDescriptor];
     
+    
+    // Mapping + Route Info
     RKObjectMapping *infoMapping = [RKObjectMapping mappingForClass:[Info class]];
     [infoMapping addAttributeMappingsFromArray:@[@"posts"]];
     RKResponseDescriptor *infoResponseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:infoMapping pathPattern:api_endpoint_info keyPath:@"response.blog" statusCodes:nil];
     [manager addResponseDescriptor:infoResponseDescriptor];
-    
-    [manager addResponseDescriptor:responseDescriptor];
     
     
     
@@ -151,6 +152,7 @@ static int post_offset_start = 0;
         }
     }];
 }
+
 - (void)getBlogInfo{
     
     RKObjectManager *objectManager = [RKObjectManager sharedManager];
